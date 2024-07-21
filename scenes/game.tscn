@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://4yqvunlkglo"]
+
+[ext_resource type="PackedScene" uid="uid://c4s4g56mwq7g8" path="res://scenes/brick_spawner.tscn" id="1_6lgkg"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_lfjxx"]
+[ext_resource type="PackedScene" uid="uid://c5pp5lk0gpxem" path="res://scenes/shooter.tscn" id="3_74caj"]
+[ext_resource type="PackedScene" uid="uid://bh1sbu1gob85e" path="res://scenes/indicator_line.tscn" id="4_j7mjx"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_lfjxx")
+brick_spawner_position = Vector2(92, 256)
+shooter_position = Vector2(92, 224)
+brick_spawner_scene = ExtResource("1_6lgkg")
+shooter_scene = ExtResource("3_74caj")
+indicator_line_scene = ExtResource("4_j7mjx")

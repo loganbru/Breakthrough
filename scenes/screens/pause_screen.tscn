@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://bhve08xgk386p"]
+
+[ext_resource type="Script" path="res://scripts/base/screen.gd" id="1_gsa4n"]
+[ext_resource type="Texture2D" uid="uid://dkhtk4lea5nla" path="res://assets/images/ui/curved.png" id="2_4k0rf"]
+[ext_resource type="PackedScene" uid="uid://c3ohtx6ilhjy0" path="res://scenes/screens/screen_button.tscn" id="2_ylgdy"]
+[ext_resource type="Texture2D" uid="uid://dekm3uryk1d6u" path="res://assets/images/ui/close.svg" id="3_ei61p"]
+[ext_resource type="FontFile" uid="uid://bv2ox1i2a4j3a" path="res://assets/fonts/BebasNeue-Regular.ttf" id="5_ll1vm"]
+[ext_resource type="Texture2D" uid="uid://diagmrk6kyswl" path="res://assets/images/ui/restart_button.png" id="5_n5lry"]
+[ext_resource type="Texture2D" uid="uid://ts342l4sjphd" path="res://assets/images/ui/end_game_button.png" id="7_u8xr2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kbs2v"]
+texture = ExtResource("2_4k0rf")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+modulate_color = Color(0, 0.0313726, 0.109804, 1)
+
+[sub_resource type="Theme" id="Theme_ptaf4"]
+Panel/styles/panel = SubResource("StyleBoxTexture_kbs2v")
+
+[sub_resource type="LabelSettings" id="LabelSettings_oexyk"]
+font = ExtResource("5_ll1vm")
+font_size = 96
+font_color = Color(0.834276, 0.846231, 0.875811, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xd4m"]
+
+[node name="PauseScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gsa4n")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -464.0
+offset_top = -674.0
+offset_right = 464.0
+offset_bottom = 674.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ptaf4")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HBox" type="HBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="PauseClose" parent="Panel/Margin/VBox/HBox" instance=ExtResource("2_ylgdy")]
+modulate = Color(0.592157, 0.615686, 0.67451, 1)
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_ei61p")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+text = "GAME PAUSED"
+label_settings = SubResource("LabelSettings_oexyk")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 256
+theme_override_styles/separator = SubResource("StyleBoxEmpty_5xd4m")
+
+[node name="Restart" parent="Panel/Margin/VBox" instance=ExtResource("2_ylgdy")]
+layout_mode = 2
+texture_normal = ExtResource("5_n5lry")
+
+[node name="EndGame" parent="Panel/Margin/VBox" instance=ExtResource("2_ylgdy")]
+layout_mode = 2
+texture_normal = ExtResource("7_u8xr2")

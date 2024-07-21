@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5pp5lk0gpxem"]
+
+[ext_resource type="Script" path="res://scripts/shooter.gd" id="1_7ea1p"]
+[ext_resource type="PackedScene" uid="uid://c0ilnt6rvl6tf" path="res://scenes/ball.tscn" id="2_0iu67"]
+[ext_resource type="Texture2D" uid="uid://bx7vdcybmoc87" path="res://assets/images/sprites/ball.png" id="2_vsn4o"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_65v8s"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_fd3o3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_elxa1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_4v8yj"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="7_7sx4u"]
+
+[node name="Shooter" type="Node2D"]
+z_index = 3
+script = ExtResource("1_7ea1p")
+ball_scene = ExtResource("2_0iu67")
+
+[node name="NextHitIndicator" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.580392)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vsn4o")
+
+[node name="BallSpawnPoint" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vsn4o")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_65v8s")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_fd3o3")
+initial_state = NodePath("Aiming")
+
+[node name="Aiming" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_elxa1")
+
+[node name="To Shoot" type="Node" parent="StateChart/Root/Aiming"]
+script = ExtResource("6_4v8yj")
+to = NodePath("../../Shoot")
+event = &"shoot"
+delay_in_seconds = "0.0"
+
+[node name="Shoot" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_7sx4u")
+
+[node name="Fire" type="Node" parent="StateChart/Root/Shoot"]
+script = ExtResource("5_elxa1")
+
+[node name="Await Return" type="Node" parent="StateChart/Root/Shoot"]
+script = ExtResource("5_elxa1")
+
+[node name="To Aim" type="Node" parent="StateChart/Root/Shoot"]
+script = ExtResource("6_4v8yj")
+to = NodePath("../../Aiming")
+event = &"aim"
+delay_in_seconds = "0.0"
+
+[connection signal="state_entered" from="StateChart/Root/Aiming" to="." method="_on_aiming_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Aiming" to="." method="_on_aiming_state_exited"]
+[connection signal="state_input" from="StateChart/Root/Aiming" to="." method="_on_aiming_state_input"]
+[connection signal="state_exited" from="StateChart/Root/Shoot" to="." method="_on_shoot_state_exited"]
+[connection signal="state_processing" from="StateChart/Root/Shoot" to="." method="_on_shoot_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/Shoot/Fire" to="." method="_on_fire_state_entered"]
+[connection signal="state_processing" from="StateChart/Root/Shoot/Fire" to="." method="_on_fire_state_processing"]
+[connection signal="state_processing" from="StateChart/Root/Shoot/Await Return" to="." method="_on_await_return_state_processing"]

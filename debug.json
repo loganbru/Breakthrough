@@ -1,0 +1,548 @@
+[
+  {
+    "sprite_file": "res://assets/sprites/3x1_brick.png",
+    "footprint": [
+      [
+        true
+      ],
+      [
+        true
+      ],
+      [
+        true
+      ]
+    ],
+    "sprite_position": Vector2(64,
+    192),
+    "sprite_rotation": 1.57079994678497,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(64,
+        192),
+        "rotation": 3.1415901184082
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape.png",
+    "footprint": [
+      [
+        false,
+        false,
+        true
+      ],
+      [
+        true,
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(192,
+    128),
+    "sprite_rotation": 3.1415901184082,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(192,
+        192),
+        "rotation": 4.71238994598389
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(320,
+        128),
+        "rotation": 3.1415901184082
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/t_shape.png",
+    "footprint": [
+      [
+        false,
+        true
+      ],
+      [
+        true,
+        true
+      ],
+      [
+        false,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    192),
+    "sprite_rotation": 4.71238994598389,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(192,
+        192),
+        "rotation": 3.1415901184082
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        192),
+        "rotation": 1.57079994678497
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape_small.png",
+    "footprint": [
+      [
+        true,
+        true
+      ],
+      [
+        true,
+        false
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    128),
+    "sprite_rotation": 3.1415901184082,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(64,
+        128),
+        "rotation": 0
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        64),
+        "rotation": 1.57079994678497
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape.png",
+    "footprint": [
+      [
+        true,
+        true,
+        true
+      ],
+      [
+        true,
+        false,
+        false
+      ]
+    ],
+    "sprite_position": Vector2(192,
+    128),
+    "sprite_rotation": 0,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(192,
+        64),
+        "rotation": 1.57079994678497
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(64,
+        128),
+        "rotation": 0
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape_small.png",
+    "footprint": [
+      [
+        true,
+        false
+      ],
+      [
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    128),
+    "sprite_rotation": 7.85398006439209,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        192),
+        "rotation": 4.71238994598389
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(64,
+        128),
+        "rotation": 6.28318977355957
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape.png",
+    "footprint": [
+      [
+        true,
+        true
+      ],
+      [
+        false,
+        true
+      ],
+      [
+        false,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    192),
+    "sprite_rotation": 1.57079994678497,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(192,
+        192),
+        "rotation": 3.1415901184082
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        64),
+        "rotation": 1.57079994678497
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/2x1_brick.png",
+    "footprint": [
+      [
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    64),
+    "sprite_rotation": 0,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        64),
+        "rotation": 1.57079994678497
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/2x1_brick.png",
+    "footprint": [
+      [
+        true
+      ],
+      [
+        true
+      ]
+    ],
+    "sprite_position": Vector2(64,
+    128),
+    "sprite_rotation": 1.57079994678497,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(64,
+        128),
+        "rotation": 3.1415901184082
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/t_shape.png",
+    "footprint": [
+      [
+        true,
+        false
+      ],
+      [
+        true,
+        true
+      ],
+      [
+        true,
+        false
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    192),
+    "sprite_rotation": 7.85398006439209,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(64,
+        192),
+        "rotation": 6.28318977355957
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        192),
+        "rotation": 4.71238994598389
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/t_shape.png",
+    "footprint": [
+      [
+        true,
+        true,
+        true
+      ],
+      [
+        false,
+        true,
+        false
+      ]
+    ],
+    "sprite_position": Vector2(192,
+    128),
+    "sprite_rotation": 3.1415901184082,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(192,
+        64),
+        "rotation": 1.57079994678497
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(192,
+        128),
+        "rotation": 0
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/t_shape.png",
+    "footprint": [
+      [
+        false,
+        true,
+        false
+      ],
+      [
+        true,
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(192,
+    128),
+    "sprite_rotation": 6.28318977355957,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(192,
+        192),
+        "rotation": 4.71238994598389
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(192,
+        128),
+        "rotation": 3.1415901184082
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape.png",
+    "footprint": [
+      [
+        true,
+        false
+      ],
+      [
+        true,
+        false
+      ],
+      [
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    192),
+    "sprite_rotation": -1.57079994678497,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(64,
+        192),
+        "rotation": 0
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        320),
+        "rotation": -1.57079994678497
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape_small.png",
+    "footprint": [
+      [
+        false,
+        true
+      ],
+      [
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    128),
+    "sprite_rotation": 6.28318977355957,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(192,
+        128),
+        "rotation": 3.1415901184082
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        192),
+        "rotation": 4.71238994598389
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/3x1_brick.png",
+    "footprint": [
+      [
+        true,
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(192,
+    64),
+    "sprite_rotation": 0,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 384,
+        "position": Vector2(192,
+        64),
+        "rotation": 1.57079994678497
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/L_shape_small.png",
+    "footprint": [
+      [
+        true,
+        true
+      ],
+      [
+        false,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    128),
+    "sprite_rotation": 4.71238994598389,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        64),
+        "rotation": 1.57079994678497
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(192,
+        128),
+        "rotation": 3.1415901184082
+      }
+    ]
+  },
+  {
+    "sprite_file": "res://assets/sprites/2x2_brick.png",
+    "footprint": [
+      [
+        true,
+        true
+      ],
+      [
+        true,
+        true
+      ]
+    ],
+    "sprite_position": Vector2(128,
+    128),
+    "sprite_rotation": 0,
+    "colliders": [
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(192,
+        128),
+        "rotation": 0
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(64,
+        128),
+        "rotation": 0
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        192),
+        "rotation": 1.57079994678497
+      },
+      {
+        "shape_radius": 64,
+        "shape_height": 256,
+        "position": Vector2(128,
+        64),
+        "rotation": 1.57079994678497
+      }
+    ]
+  }
+]

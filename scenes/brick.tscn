@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cq54xyfgxx30o"]
+
+[ext_resource type="Script" path="res://scripts/brick.gd" id="1_fgpol"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_f4ue6"]
+[ext_resource type="PackedScene" uid="uid://bt4y1qjloejpd" path="res://scenes/effects/explosion_particles.tscn" id="2_v6ty6"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_6mdi2"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_h8r71"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_765jw"]
+
+[node name="Brick" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_fgpol")
+base_brick_colors = Array[Color]([Color(0.0156863, 0.4, 0.784314, 1), Color(0.012, 0.325, 0.643, 1), Color(0.008, 0.243, 0.49, 1)])
+explosion_scene = ExtResource("2_v6ty6")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("2_f4ue6")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("3_6mdi2")
+initial_state = NodePath("Instanced")
+
+[node name="Instanced" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_h8r71")
+
+[node name="To Destroyed" type="Node" parent="StateChart/Root/Instanced"]
+script = ExtResource("5_765jw")
+to = NodePath("../../Destroyed")
+event = &"destroyed"
+delay_in_seconds = "0.0"
+
+[node name="Destroyed" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_h8r71")
+
+[node name="To Delete" type="Node" parent="StateChart/Root/Destroyed"]
+script = ExtResource("5_765jw")
+to = NodePath("../../Delete")
+delay_in_seconds = "0.0"
+
+[node name="Delete" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_h8r71")
+
+[connection signal="state_processing" from="StateChart/Root/Instanced" to="." method="_on_instanced_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/Destroyed" to="." method="_on_destroyed_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Delete" to="." method="_on_delete_state_entered"]

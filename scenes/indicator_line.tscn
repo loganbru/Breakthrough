@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh1sbu1gob85e"]
+
+[ext_resource type="Script" path="res://scripts/indicator_line.gd" id="1_y8riu"]
+
+[sub_resource type="Gradient" id="Gradient_d3u68"]
+colors = PackedColorArray(0.490196, 0.521569, 0.592157, 1, 0.490196, 0.521569, 0.592157, 0)
+
+[node name="IndicatorLine" type="Line2D"]
+z_index = 1
+width = 32.0
+default_color = Color(0.490196, 0.521569, 0.592157, 1)
+gradient = SubResource("Gradient_d3u68")
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_y8riu")

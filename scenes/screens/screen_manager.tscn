@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://drt0b6vdp5vor"]
+
+[ext_resource type="PackedScene" uid="uid://bhve08xgk386p" path="res://scenes/screens/pause_screen.tscn" id="1_bfowu"]
+[ext_resource type="Script" path="res://scripts/screens/screen_manager.gd" id="1_idoi8"]
+[ext_resource type="PackedScene" uid="uid://cdkwixqed553r" path="res://scenes/screens/game_over_screen.tscn" id="3_im1de"]
+
+[node name="ScreenManager" type="CanvasLayer"]
+process_mode = 3
+layer = 101
+script = ExtResource("1_idoi8")
+
+[node name="PauseScreen" parent="." instance=ExtResource("1_bfowu")]
+
+[node name="GameOverScreen" parent="." instance=ExtResource("3_im1de")]

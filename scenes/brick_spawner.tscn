@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4s4g56mwq7g8"]
+
+[ext_resource type="Script" path="res://scripts/brick_spawner.gd" id="1_drqeo"]
+[ext_resource type="PackedScene" uid="uid://cq54xyfgxx30o" path="res://scenes/brick.tscn" id="2_who6u"]
+[ext_resource type="Texture2D" uid="uid://br4kdbcn0lrn8" path="res://assets/images/ui/curved_panel.png" id="3_lqcqj"]
+[ext_resource type="Texture2D" uid="uid://ppq7e52wy6nv" path="res://assets/images/ui/grid.png" id="3_nehm3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sk2k5"]
+texture = ExtResource("3_lqcqj")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[sub_resource type="Theme" id="Theme_epfbx"]
+Panel/styles/panel = SubResource("StyleBoxTexture_sk2k5")
+
+[node name="BrickSpawner" type="Node2D"]
+script = ExtResource("1_drqeo")
+brick_scene = ExtResource("2_who6u")
+
+[node name="Background" type="Panel" parent="."]
+theme = SubResource("Theme_epfbx")
+
+[node name="GridContainer" type="Node2D" parent="."]
+
+[node name="Grid" type="TextureRect" parent="."]
+visible = false
+offset_right = 896.0
+offset_bottom = 1792.0
+texture = ExtResource("3_nehm3")

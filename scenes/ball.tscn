@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0ilnt6rvl6tf"]
+
+[ext_resource type="Texture2D" uid="uid://bx7vdcybmoc87" path="res://assets/images/sprites/ball.png" id="1_7bhmp"]
+[ext_resource type="Script" path="res://scripts/ball.gd" id="1_q000v"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_52mq4"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_e1vy0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_0rj0k"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_yp2a5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40qb6"]
+radius = 16.0
+
+[node name="Ball" type="CharacterBody2D" groups=["balls"]]
+z_index = 2
+collision_mask = 14
+safe_margin = 0.001
+script = ExtResource("1_q000v")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_7bhmp")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_40qb6")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_52mq4")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_e1vy0")
+initial_state = NodePath("Shot")
+
+[node name="Shot" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_0rj0k")
+
+[node name="To Return" type="Node" parent="StateChart/Root/Shot"]
+script = ExtResource("6_yp2a5")
+to = NodePath("../../Return")
+event = &"return"
+delay_in_seconds = "0.0"
+
+[node name="Global Timeout" type="Node" parent="StateChart/Root/Shot"]
+script = ExtResource("6_yp2a5")
+to = NodePath("../../Return")
+delay_in_seconds = "60.0"
+
+[node name="Return" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_0rj0k")
+
+[node name="To Delete" type="Node" parent="StateChart/Root/Return"]
+script = ExtResource("6_yp2a5")
+to = NodePath("../../Delete")
+delay_in_seconds = "1.5"
+
+[node name="Delete" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_0rj0k")
+
+[connection signal="state_entered" from="StateChart/Root/Shot" to="." method="_on_shot_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Shot" to="." method="_on_shot_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Return" to="." method="_on_return_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Return" to="." method="_on_return_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Delete" to="." method="_on_delete_state_entered"]
