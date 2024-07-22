@@ -25,3 +25,8 @@ func get_rotated_bounding_box_size(_sprite : Sprite2D) -> Vector2:
 	var bounding_box_size = Vector2(max_x - min_x, max_y - min_y)
 	
 	return bounding_box_size
+
+func merge_arrays(arr1: Array, arr2: Array) -> Array:
+	var merged_array = arr1.duplicate()  # Create a copy of the first array to avoid modifying the original
+	merged_array.append_array(arr2)  # Append the second array to the copied first array
+	return merged_array

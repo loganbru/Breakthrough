@@ -1,31 +1,110 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4s4g56mwq7g8"]
+[gd_scene load_steps=8 format=3 uid="uid://c4s4g56mwq7g8"]
 
 [ext_resource type="Script" path="res://scripts/brick_spawner.gd" id="1_drqeo"]
 [ext_resource type="PackedScene" uid="uid://cq54xyfgxx30o" path="res://scenes/brick.tscn" id="2_who6u"]
-[ext_resource type="Texture2D" uid="uid://br4kdbcn0lrn8" path="res://assets/images/ui/curved_panel.png" id="3_lqcqj"]
-[ext_resource type="Texture2D" uid="uid://ppq7e52wy6nv" path="res://assets/images/ui/grid.png" id="3_nehm3"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sk2k5"]
-texture = ExtResource("3_lqcqj")
-texture_margin_left = 32.0
-texture_margin_top = 32.0
-texture_margin_right = 32.0
-texture_margin_bottom = 32.0
-
-[sub_resource type="Theme" id="Theme_epfbx"]
-Panel/styles/panel = SubResource("StyleBoxTexture_sk2k5")
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_ws8c1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_qi7rh"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_d6jlx"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_txrec"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="9_mnqyc"]
 
 [node name="BrickSpawner" type="Node2D"]
 script = ExtResource("1_drqeo")
 brick_scene = ExtResource("2_who6u")
 
-[node name="Background" type="Panel" parent="."]
-theme = SubResource("Theme_epfbx")
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 773.0
+offset_bottom = 1143.0
+color = Color(0, 0.0705882, 0.2, 1)
 
 [node name="GridContainer" type="Node2D" parent="."]
 
-[node name="Grid" type="TextureRect" parent="."]
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_ws8c1")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_qi7rh")
+initial_state = NodePath("New Game")
+
+[node name="New Game" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_d6jlx")
+
+[node name="To Creating Grid" type="Node" parent="StateChart/Root/New Game"]
+script = ExtResource("6_txrec")
+to = NodePath("../../Creating Grid")
+event = &"create_grid"
+delay_in_seconds = "0.0"
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_d6jlx")
+
+[node name="To Moving Up" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("6_txrec")
+to = NodePath("../../Moving Up")
+event = &"move_up"
+delay_in_seconds = "0.0"
+
+[node name="To Creating Grid" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("6_txrec")
+to = NodePath("../../Creating Grid")
+event = &"create_grid"
+delay_in_seconds = "0.0"
+
+[node name="Moving Up" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_d6jlx")
+
+[node name="To Idle" type="Node" parent="StateChart/Root/Moving Up"]
+script = ExtResource("6_txrec")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="To Creating Grid" type="Node" parent="StateChart/Root/Moving Up"]
+script = ExtResource("6_txrec")
+to = NodePath("../../Creating Grid")
+event = &"create_grid"
+delay_in_seconds = "0.0"
+
+[node name="Creating Grid" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_d6jlx")
+
+[node name="To Idle" type="Node" parent="StateChart/Root/Creating Grid"]
+script = ExtResource("6_txrec")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="To Moving Up" type="Node" parent="StateChart/Root/Creating Grid"]
+script = ExtResource("6_txrec")
+to = NodePath("../../Moving Up")
+event = &"move_up"
+delay_in_seconds = "0.0"
+
+[node name="To New Game" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_txrec")
+to = NodePath("../New Game")
+event = &"new_game"
+delay_in_seconds = "0.0"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
-offset_right = 896.0
-offset_bottom = 1792.0
-texture = ExtResource("3_nehm3")
+
+[node name="StateChartDebugger" parent="CanvasLayer" instance=ExtResource("9_mnqyc")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -217.0
+offset_bottom = 217.0
+grow_horizontal = 0
+enabled = false
+initial_node_to_watch = NodePath("../../StateChart")
+
+[connection signal="state_entered" from="StateChart/Root/New Game" to="." method="_on_new_game_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Idle" to="." method="_on_idle_state_exited"]
+[connection signal="state_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/Moving Up" to="." method="_on_moving_up_state_entered"]
+[connection signal="state_processing" from="StateChart/Root/Moving Up" to="." method="_on_moving_up_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/Creating Grid" to="." method="_on_creating_grid_state_entered"]

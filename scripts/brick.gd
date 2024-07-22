@@ -12,6 +12,7 @@ extends CharacterBody2D
 @export var base_brick_colors : Array[Color] = [Color(0.016, 0.4, 0.784), Color(0.012, 0.325, 0.643), Color(0.008, 0.243, 0.49)]
 @export var explosion_scene : PackedScene
 
+var marked_for_deletion : bool = false
 var health_label : Label = null
 var health = 100
 var max_health : int
@@ -621,6 +622,7 @@ func setup_nodes(variant_index):
 		add_child(_collision_shape)
 		colliders.append(_collision_shape)
 
+
 func setup_health(_health_value):
 	health = _health_value
 	max_health = _health_value
@@ -666,6 +668,7 @@ func _on_instanced_state_processing(delta):
 		sprite.modulate.a = float(health) / float(max_health)
 	
 	if health <= 0:
+		marked_for_deletion = true
 		state_chart.send_event("destroyed")
 	else:
 		health_label.text = str(health)

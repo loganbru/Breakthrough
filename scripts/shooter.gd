@@ -9,11 +9,13 @@ signal shot_over
 @onready var next_hit_indicator : Sprite2D = $NextHitIndicator
 
 @export var ball_scene : PackedScene
-@export var ball_count : float = 100
+@export var starting_ball_count : int = 10
 @export var brick_collision_layer: int = 3
 @export var max_shot_length : float = 5.0
 @export var max_interval : float = 0.1
 
+var ball_count : int = 10
+var brick_spawner : BrickSpawner = null
 var ball_container : Node2D = null
 var detector : Area2D = null
 var indicator_line : IndicatorLine = null
@@ -32,9 +34,10 @@ func new_game():
 	set_next_shot_position(Vector2(540, 0))
 	state_chart.send_event("aim")
 
-func setup_shooter(_shooter_width, _ball_container):
+func setup_shooter(_shooter_width, _ball_container, _brick_spawner):
 	shooter_width = _shooter_width
 	ball_container = _ball_container
+	brick_spawner = _brick_spawner
 	setup_detector()
 
 func setup_indicator_line(_indicator_line):
@@ -100,24 +103,25 @@ func _on_aiming_state_entered():
 	ball_spawn_point.modulate.a = 1.0
 
 func _on_aiming_state_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				is_dragging = true
+	if brick_spawner.ready_for_shot == true:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					is_dragging = true
+				else:
+					is_dragging = false
+					indicator_line.hide_line()
+					var angle_y_value = ball_spawn_point.global_position.direction_to(event.position).y
+					if angle_y_value >= 0.15:
+						state_chart.send_event("shoot")
+						state_chart.set_expression_property("shot_direction", ball_spawn_point.global_position.direction_to(event.position))
+		elif event is InputEventMouseMotion and is_dragging:
+			var angle_y_value = ball_spawn_point.global_position.direction_to(event.position).y
+			if angle_y_value >= 0.15:
+				update_indicator_line(event)
+				indicator_line.show_line()
 			else:
-				is_dragging = false
 				indicator_line.hide_line()
-				var angle_y_value = ball_spawn_point.global_position.direction_to(event.position).y
-				if angle_y_value >= 0.15:
-					state_chart.send_event("shoot")
-					state_chart.set_expression_property("shot_direction", ball_spawn_point.global_position.direction_to(event.position))
-	elif event is InputEventMouseMotion and is_dragging:
-		var angle_y_value = ball_spawn_point.global_position.direction_to(event.position).y
-		if angle_y_value >= 0.15:
-			update_indicator_line(event)
-			indicator_line.show_line()
-		else:
-			indicator_line.hide_line()
 
 func _on_aiming_state_exited():
 	ball_spawn_point.modulate.a = 0.5
@@ -158,5 +162,6 @@ func _on_await_return_state_processing(delta):
 	if shots_fired >= ball_count:
 		var balls_in_scene = get_tree().get_nodes_in_group("balls")
 		if balls_in_scene.size() == 0:
-			state_chart.send_event("aim")
+			if brick_spawner.ready_for_shot == true:
+				state_chart.send_event("aim")
 #endregion

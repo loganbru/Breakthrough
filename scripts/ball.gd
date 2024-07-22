@@ -11,6 +11,8 @@ extends CharacterBody2D
 var initial_velocity : Vector2
 var time_cache : float = 0.0
 
+var bounce_count = 0
+
 #region SETUP
 func _ready():
 	velocity = initial_velocity
@@ -36,7 +38,11 @@ func _on_shot_state_physics_processing(delta):
 	
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
-		velocity = velocity.bounce(collision_info.get_normal())
+		bounce_count += 1
+		var speed_multiplier = 1 + (bounce_count * 0.001)
+		if speed_multiplier > 1.05:
+			speed_multiplier = 1.05
+		velocity = velocity.bounce(collision_info.get_normal()) * speed_multiplier
 		var collider = collision_info.get_collider()
 		if collider is Brick:
 			time_cache = 0.0
