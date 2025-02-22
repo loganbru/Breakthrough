@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/BebasNeue-Regular.ttf-7a75156d35bda4b35a4dba5
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

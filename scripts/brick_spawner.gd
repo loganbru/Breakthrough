@@ -132,6 +132,16 @@ func find_highest_brick():
 					highest_brick = _brick
 	return highest_brick
 
+func find_lowest_brick():
+	var lowest_y = -100000000
+	var lowest_brick : Brick = null
+	for _brick : Brick in grid_container.get_children():
+			if _brick.global_position.y > lowest_y:
+				if _brick.marked_for_deletion == false and _brick.is_queued_for_deletion() == false:
+					lowest_y = _brick.global_position.y
+					lowest_brick = _brick
+	return lowest_brick
+
 func check_placement(y_index_min, y_index_max, brick_instance, brick_variant_index, x, y):
 	var footprint = brick_instance.brick_variants[brick_variant_index].footprint
 	var footprint_height = footprint.size()
@@ -227,9 +237,12 @@ func _on_creating_grid_state_entered():
 #region MOVING UP
 func _on_moving_up_state_entered():
 	var highest_brick = find_highest_brick()
+	var lowest_brick = find_lowest_brick()
 	
 	if highest_brick == null:
 		game_object.move_up_counter = 0
+		ball_buff += 1
+		calculate_ball_count()
 		state_chart.send_event("create_grid")
 	else:
 		var move_amount = to_local(highest_brick.global_position).y - (lead_rows * grid_size)
@@ -238,7 +251,7 @@ func _on_moving_up_state_entered():
 		
 		var _new_pos : Vector2 = grid_container.position + Vector2(0, -move_amount)
 		var move_tween = get_tree().create_tween()
-		move_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		#move_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		move_tween.tween_property(grid_container, "position", _new_pos, 0.5).set_ease(Tween.EASE_IN_OUT)
 		#grid_container.position = _new_pos
 		
@@ -251,4 +264,3 @@ func _on_moving_up_state_entered():
 		depth_changed.emit(game_object.depth)
 		state_chart.send_event("idle")
 #endregion
-

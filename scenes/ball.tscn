@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c0ilnt6rvl6tf"]
 
-[ext_resource type="Texture2D" uid="uid://bx7vdcybmoc87" path="res://assets/images/sprites/ball.png" id="1_7bhmp"]
+[ext_resource type="Texture2D" uid="uid://co8qfyo4kqqih" path="res://assets/images/sprites/ball.png" id="1_7bhmp"]
 [ext_resource type="Script" path="res://scripts/ball.gd" id="1_q000v"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_52mq4"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_e1vy0"]

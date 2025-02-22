@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/shooter.gd" id="1_7ea1p"]
 [ext_resource type="PackedScene" uid="uid://c0ilnt6rvl6tf" path="res://scenes/ball.tscn" id="2_0iu67"]
-[ext_resource type="Texture2D" uid="uid://bx7vdcybmoc87" path="res://assets/images/sprites/ball.png" id="2_vsn4o"]
+[ext_resource type="Texture2D" uid="uid://co8qfyo4kqqih" path="res://assets/images/sprites/ball.png" id="2_vsn4o"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_65v8s"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_fd3o3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_elxa1"]

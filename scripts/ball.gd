@@ -39,9 +39,9 @@ func _on_shot_state_physics_processing(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		bounce_count += 1
-		var speed_multiplier = 1 + (bounce_count * 0.001)
-		if speed_multiplier > 1.05:
-			speed_multiplier = 1.05
+		var speed_multiplier = 1.0
+		if bounce_count < 10:
+			speed_multiplier = 1.01
 		velocity = velocity.bounce(collision_info.get_normal()) * speed_multiplier
 		var collider = collision_info.get_collider()
 		if collider is Brick:
